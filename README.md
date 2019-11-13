@@ -68,10 +68,13 @@ The main assignment required me to integrate the prediction to a REST API with, 
 ```python
 python JIRA_prediction.py
 ```
-For calling the command both Command promp and Postman can be used. 
+For calling the command both Command promp and Postman can be used.
+
 Call Example:
 
 	GET /issue/{issue-key}/resolve-prediction
+* Command prompt ``` curl http://127.0.0.1:5000/issue/AVRO-1333/resolve-prediction```
+* Postman ``` GET 127.0.0.1:5000/issue/AVRO-1333/resolve-prediction```
 
 Response Example:
 ```bash
@@ -80,11 +83,15 @@ Response Example:
 	'predicted_resolution_date' : '2013-09-07T09:24:31.761+0000'
 }
 ```
-Additionally, I was asked to build "Release planning Assistnace" , which takes as the input valid date and respond with all issues that are not respond with all issues that are not resolved at the time of calling. 
+Additionally, I was asked to build "Release planning Assistance" , which takes as the input valid date and respond with all issues that  are not resolved at the time of calling. 
 
 Call Example:
 
 	GET /release/{date}/resolved-since-now
+* Command prompt 
+``` curl http://127.0.0.1:5000/release/2013-05-27T09:33:23.123+0200/resolved-since-now```
+* Postman 
+``` GET 127.0.0.1:5000/release/2013-05-27T09:33:23.123+0200/resolved-since-now```
 
 Response Example:
 ```bash
