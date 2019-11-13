@@ -70,7 +70,7 @@ For building ML model I have generated of list of features, which could explain 
 Training of a Multi Linear Regression model for prediction the resolution date for the issue. 
 
 ```python
-python buildMLR.py path
+python build_MLR_model.py path
 ```
 After model is trained the Pickle operation is used to serialize the model. 
 
@@ -79,14 +79,14 @@ After model is trained the Pickle operation is used to serialize the model.
 To predict the resolution date, it is required to deserialize the creted model and run prediction algorithm.
 
 ```python
-python predictMLR.py {issue-key}
+python prediction_MLR.py {issue-key}
 ```
 
 ## Results
 The main assignment required me to integrate the prediction to a REST API with, which returns JSON response
 
 ```python
-python JIRA_prediction.py
+python JIRA_restful_api.py
 ```
 For calling the command both Command promp and Postman can be used.
 
