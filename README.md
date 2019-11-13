@@ -1,23 +1,19 @@
 # JIRA-assignment-
-JIRA assignment for Xccelerated interview 
+JIRA assignment for Xccelerated interview.
+The assignment of this interview required to development a solution for "Issue Resolution Time" problem. 
+For building a prediction model was decided to use Multi Linear Regression.
+The reason for this choice was based on the amount of possible feature that explain the data variation and the model output type which was suppose to be be exact date.
 
-# Getting Started
+Another possible approach for the following problem could be using Classification algorithms.
+Instead of predicting the exact date we could assign a "Resolution Time" class to an issue.
+This solution could be a back-up plan.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-## Installation 
-```bash
-pip install -U scikit-learn
-pip install -U Flask
-pip install flask-restful
-pip install pickle-mixin 
-pip install seaborn
-pip install matplotlib
-```
 # Feature Extraction
-For building ML model I have generated of list of features, which could explain data spread.
+First of all, before applying any ML algorithm, it is required to extract the sufficient features from a collected data.
+The data was provided: ``` avro-issues.csv    avro-transitions.csv   avro-daycounts,csv ```
+For building ML model I have generated of list of features, which could explain data variation.
 #### These features were genereted:
-
+``` new_feature_list.csv ```
 * full_resolution_time - Time required to resolve the issues (applicable to "Resolved issues")
 * from_last_update - The time from last status update to issue resolution (applicable to "Resolved issues")
 * from_create_to_update - The time from moment of creation until last update
@@ -63,34 +59,56 @@ For building ML model I have generated of list of features, which could explain 
 	7 - Urgent
 	8 - Blocker
 ```
+There could be more feature generated, however due to time restrictions I could not generate more. 
+# Getting Started
+The assignment required to integrate my prediction model to REST API. 
+Install following packages(if they are missing) before running the code...
+
+## Installation 
+```bash
+pip install -U scikit-learn
+pip install -U Flask
+pip install flask-restful
+pip install pickle-mixin 
+pip install seaborn
+pip install matplotlib
+```
+Download the Project zip file and use Command prompt to get to project directory.
 
 # Running the tests
+For demonstation puproses, the model was already trained and saved in the same folder with the name
+``` finalized_model.sav ``` and ``` finalized_model(without-outliers).sav  ```
+Therefore, training and testing the model is not required. Although, if you want to do that, following commands explaining you how. 
 
-## Building the model
+## Model Training
 Training of a Multi Linear Regression model for prediction the resolution date for the issue. 
+After model is trained the Pickle operation is used to serialize the model using following command:
 
 ```python
-python build_MLR_model.py path
+python build_MLR_model.py 
 ```
-After model is trained the Pickle operation is used to serialize the model. 
 
-## Testing
+
+## Model Testing
 
 To predict the resolution date, it is required to deserialize the creted model and run prediction algorithm.
+It is done using following command:
 
 ```python
-python prediction_MLR.py {issue-key}
+python prediction_MLR.py
 ```
 
-## Results
-The main assignment required me to integrate the prediction to a REST API with, which returns JSON response
+## Assignment Results
+The main assignment required me to integrate the prediction to a REST API with, which returns JSON response.
+To start the program type following command in the Command prompt
 
 ```python
 python JIRA_restful_api.py
 ```
-For calling the command both Command promp and Postman can be used.
+For sending requests both Postman or Command prompt can be used. (Open additional cmd window for the requests)
 
-Call Example:
+
+Request Example:
 
 	GET /issue/{issue-key}/resolve-prediction
 * Command prompt ``` curl http://127.0.0.1:5000/issue/AVRO-1333/resolve-prediction```
@@ -105,7 +123,7 @@ Response Example:
 ```
 Additionally, I was asked to build "Release planning Assistance" , which takes as the input valid date and respond with all issues that  are not resolved at the time of calling. 
 
-Call Example:
+Request Example:
 
 	GET /release/{date}/resolved-since-now
 * Command prompt 
@@ -131,11 +149,8 @@ Response Example:
 ```
 
 # Future Improvements
-Additional recommendation to improve the accuracy of the predicion model
 
-## Points of Improvement
-
-1. Clean data from outliers 
+1. Clean data from more outliers 
 2. Build separate models based on classes (requires more data)
 3. Use different approach of predicting resoluiton time (Use classification models)
 4. Check the amount of open task at the (More open, more time takes to resolve)
