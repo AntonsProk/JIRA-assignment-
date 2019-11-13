@@ -31,7 +31,15 @@ For building ML model I have generated of list of features, which could explain 
 * classes_by_frt - Class under which issue falls based on full resolution time (used only for classifiers)
 * classes_by_flu - Class under which issue falls based on time from last update to issue resolution (used only for classifiers)
 * classes_by_fctu - Class under which issue falls based on time from creation to last update (used only for classifiers)
-	 
+```
+	Where classes are:
+	0 - less than 1 day
+	1 - 1-5 days
+	2 - 5-10 days
+	3 - 10-50 days
+	4 - more than 50 days 
+```
+
 #### These features were transfered from avro-issue.csv and avro-transitions.csv:
 	 
 * created - The date when issues is created, used to calculate final resolution date
@@ -42,7 +50,19 @@ For building ML model I have generated of list of features, which could explain 
 * watch_count - the number of the issue watchers
 * comment_count - the number of the issue comments
 * reporter - the name of the reporter
-* key - the ID of the issue key
+* key - the ID of the issue key 
+```
+	Where priority is:			Where issue-type is:	 
+	0 - Trival				0 - Wish
+	1 - Low					1 - Task
+	2 - Minor				2 - Subtask
+	3 - Normal				3 - Test
+	4 - Major				4 - Improvement
+	5 - High				5 - Bug
+	6 - Critical
+	7 - Urgent
+	8 - Blocker
+```
 
 # Running the tests
 
